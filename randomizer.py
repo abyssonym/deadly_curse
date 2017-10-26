@@ -80,6 +80,17 @@ class EnemyObject(TableObject):
                 random_degree=0.25, wide=True)
             o.object_data = my_hp
 
+        death = ObjectObject.get_by_pointer(0x5cde)
+        mask = ObjectObject.get_by_pointer(0x5ac6)
+        assert death.object_type == 0x44
+        assert mask.object_type == 0x42
+        if random.choice([True, False]):
+            death.object_type = 0x42
+            mask.object_type = 0x44
+        if random.choice([True, False]):
+            death.object_data = mask.old_data["object_data"]
+            mask.object_data = death.old_data["object_data"]
+
 class ManEntObject(TableObject):
     flag = 'o'
     flag_description = "mansion order"
