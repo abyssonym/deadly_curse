@@ -35,6 +35,51 @@ class EnemyObject(TableObject):
     flag = 'm'
     flag_description = "monsters"
 
+    @classmethod
+    def randomize_all(cls):
+        enemy_ids = (
+            range(1, 7) + range(8, 0xb) + range(0xd, 0x14) + range(0x15, 0x19)
+            + [0x1b, 0x1d, 0x1f] + range(0x38, 0x3c) + range(0x3f, 0x42))
+        enemy_ids += [eid | 0x80 for eid in enemy_ids]
+        used_object_ids = [o.object_type for o in ObjectObject.every]
+        used_enemy_ids = [eid for eid in enemy_ids if eid in used_object_ids]
+
+        all_mappings = set([])
+        for o in ObjectObject.every:
+            all_mappings |= set(o.mappings)
+        all_mappings = sorted(all_mappings)
+
+        canddict = defaultdict(set)
+        for (zone, sector, screen) in all_mappings:
+            objs = ObjectObject.get_for_mapping(zone, sector, screen)
+            objs = [o.object_type for o in objs
+                    if o.object_type in used_enemy_ids]
+            for o in sorted(objs):
+                canddict[zone, o] |= set(objs)
+                canddict[zone] |= set(objs)
+
+        for o in ObjectObject.every:
+            if o.object_type not in used_enemy_ids:
+                continue
+            o.reseed(salt="monster")
+            zones = sorted(set([z for (z, s1, s2) in o.mappings]))
+            assert len(zones) == 1
+            candidates = sorted(set(canddict[zones[0]]))
+            o.object_type = random.choice(candidates)
+
+            new_hps = [o2.object_data for o2 in ObjectObject.every
+                       if o2.object_type == o.object_type]
+            low_hp, high_hp = min(new_hps), max(new_hps)
+            my_hp = o.object_data
+            if high_hp < my_hp:
+                my_hp = (my_hp + high_hp) / 2
+            if low_hp > my_hp:
+                my_hp = (my_hp + low_hp) / 2
+            my_hp = mutate_normal(
+                my_hp, min(my_hp, low_hp), max(my_hp, high_hp),
+                random_degree=0.25, wide=True)
+            o.object_data = my_hp
+
 class ManEntObject(TableObject):
     flag = 'o'
     flag_description = "mansion order"
@@ -109,12 +154,11 @@ def route_items():
     pointers = [int(p, 0x10) for p in ir.assign_conditions
                 if p not in ir.definitions]
     assert 0x5a65 not in pointers
-    objs = [o for o in ObjectObject.every if o.pointer in pointers]
-    assert len(objs) == len(pointers)
+    item_objs = [o for o in ObjectObject.every if o.pointer in pointers]
+    assert len(item_objs) == len(pointers)
     aggression = 3
 
-    # Must have dracula's heart for Braham (to reach the entrance)
-
+    ObjectObject.class_reseed(salt="mansions")
     mansions = range(5)
     random.shuffle(mansions)
     if 'o' not in get_flags():
@@ -147,11 +191,12 @@ def route_items():
 
     ir._assignable_cache = {}
 
-    remains = [o for o in objs if o.object_type == 0x25]
+    ObjectObject.class_reseed(salt="remains")
+    remains = [o for o in item_objs if o.object_type == 0x25]
     while True:
         random.shuffle(remains)
         # Braham can't contain Dracula's Heart
-        if remains[2].object_data != 0x19:
+        if remains[3].object_data != 0x19:
             break
 
     labeldict = {
@@ -184,6 +229,7 @@ def route_items():
     ir.set_custom_assignments(custom_items)
     assert len(remains) == len(mansions)
 
+    ObjectObject.class_reseed(salt="route")
     ir.assign_everything(aggression=aggression)
     assigned_codes = []
     for item in sorted(ir.assigned_items):
@@ -192,9 +238,11 @@ def route_items():
         except ValueError:
             code = labeldict[item]
         assigned_codes.append(code)
+    assert 0xae06 in assigned_codes
 
+    ObjectObject.class_reseed(salt="extras")
     remaining_objs = []
-    for o in objs:
+    for o in item_objs:
         if o.signature in assigned_codes:
             assigned_codes.remove(o.signature)
             continue
