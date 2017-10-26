@@ -31,12 +31,26 @@ for line in open(object_mappings_filename):
     OBJECT_MAPPINGS[pointer].add((zone, sector, screen))
 
 
-class ManEntObject(TableObject): pass
+class EnemyObject(TableObject):
+    flag = 'm'
+    flag_description = "monsters"
 
+class ManEntObject(TableObject):
+    flag = 'o'
+    flag_description = "mansion order"
+
+    def cleanup(self):
+        address = getattr(addresses, "mexit%s" % (self.mansion-6))
+        f = open(get_outfile(), "r+b")
+        f.seek(address)
+        f.write(chr(self.index))
+        f.seek(address+3)
+        f.write(chr(self.index))
+        f.close()
 
 class ObjectObject(TableObject):
-    #flag = 'p'
-    #custom_random_enable = True
+    flag = 'i'
+    flag_description = "items"
 
     def __repr__(self):
         s = "{0:0>3} {5:0>4} {1:0>2} {2:0>2} {3:0>2} {4:0>2}".format(
@@ -103,6 +117,8 @@ def route_items():
 
     mansions = range(5)
     random.shuffle(mansions)
+    if 'o' not in get_flags():
+        mansions = sorted(mansions)
 
     mansion_conversion = dict(enumerate(mansions))
     mansion_pointers = {1: (0x5b45, 0x5b99),  # Berkeley
