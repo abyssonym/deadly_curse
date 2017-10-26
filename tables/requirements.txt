@@ -1,0 +1,88 @@
+.def rover blue_crystal&white_crystal
+.def braham dracula_heart&stake&laurels
+.def alba laurels
+.def ondol alba
+.def berkeley *
+.def bodley ondol&holy_water
+.def laruba ondol&holy_water&red_crystal&blue_crystal&white_crystal
+
+# white crystal
+50f8    *
+# thorn whip
+514e    *
+# holy water
+5153    *
+
+# dagger
+52a5    holy_water
+# chain whip
+52aa    holy_water
+
+# berkeley - (1, 7, 0)?
+# berkeley stake
+5b45    berkeley
+# dracula's rib
+5b99    berkeley
+
+# sacred flame
+#66b0    holy_water
+
+# garlic
+51ef    holy_water
+# laurels
+51ff    holy_water
+
+# blue crystal
+517c    *
+
+# rover - (1, 8, 0)?
+# rover stake
+5c47    rover
+# dracula's heart
+5c4b    rover
+
+# braham - (1, 9, 0)?
+# braham stake
+5ca0    braham
+# death
+#5cde    braham
+# dracula's eye
+5ce3    braham
+
+#diamond
+684f    braham
+
+# red crystal
+5135    alba
+
+# garlic
+5159    alba&holy_water
+# laurels
+515f    alba&holy_water
+
+# morning star
+52b4    ondol
+# laurels
+52c0    ondol&holy_water
+
+# bodley (1, 10, 0)
+# bodley stake
+5f97    bodley
+# dracula's nail
+5fab    bodley
+
+# flame whip
+72b1    laruba
+
+# laruba (1, 6, 0)
+# laruba laurels
+# 5a65    laruba
+# laruba stake
+5aa1    laruba
+# mask boss
+#5ac6
+# dracula's ring
+5acb    laruba
+
+# doina laurels
+5209    laruba

@@ -1,0 +1,3 @@
+ObjectObject        object_table.txt            object_pointers.txt
+ManEntObject        mansion_entrance_table.txt  dd20    5
+.patch              mansion_entrance_patch.txt
