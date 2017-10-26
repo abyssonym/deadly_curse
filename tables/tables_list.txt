@@ -7,3 +7,5 @@ $mexit2             9251
 $mexit3             969a
 $mexit4             9a70
 .patch              mansion_entrance_patch.txt
+.option             fast_transition_patch.txt
+.option             double_hearts_patch.txt
