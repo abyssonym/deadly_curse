@@ -14,7 +14,7 @@ from time import time
 from collections import Counter
 
 
-VERSION = 0
+VERSION = 1
 ALL_OBJECTS = None
 DEBUG_MODE = False
 OBJECT_MAPPINGS = defaultdict(set)
@@ -303,7 +303,7 @@ def route_items():
 
 if __name__ == "__main__":
     try:
-        print ("You are using the Castlevania 2 "
+        print ("You are using the Castlevania 2 Deadly Curse "
                "randomizer version %s." % VERSION)
         print
 
