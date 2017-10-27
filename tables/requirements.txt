@@ -3,8 +3,8 @@
 .def alba laurels
 .def ondol alba
 .def berkeley *
-.def bodley ondol&holy_water
 .def laruba ondol&holy_water&red_crystal&blue_crystal&white_crystal
+.def bodley laruba
 
 # white crystal
 50f8    *
