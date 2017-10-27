@@ -67,7 +67,7 @@ class EnemyObject(TableObject):
             candidates = sorted(set(canddict[zones[0]]))
             o.object_type = random.choice(candidates)
 
-            new_hps = [o2.object_data for o2 in ObjectObject.every
+            new_hps = [o2.old_data["object_data"] for o2 in ObjectObject.every
                        if o2.object_type == o.object_type]
             low_hp, high_hp = min(new_hps), max(new_hps)
             my_hp = o.object_data
