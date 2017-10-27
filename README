@@ -1,0 +1,53 @@
+Castlevania 2 Deadly Curse Randomizer
+Version:    1
+Date:       October 26, 2017
+URL:
+    https://abyssonym.wordpress.com/2017/10/27/castlevania-2-deadly-curse/
+Contact:    https://twitter.com/abyssonym
+
+--- HOW TO USE ---
+Running the randomizer:
+    Windows users may use the executable file, "cv2_deadly_curse.exe". Other users, please run "randomizer.py" using Python version 2.7.
+
+Source rom file:
+    This randomizer requires a Castlevania 2: Simon's Quest rom with the following hash:
+    MD5 - 1b827c602c904d8c846499c9f54b93e0 (NA)
+
+Seed value:
+    Input a seed value here, or leave it blank if you don't care.
+
+Flags:
+    i  Randomize items.
+    m  Randomize monsters.
+    o  Randomize mansion order.
+
+Output files:
+    The randomizer will output a new, randomized rom with the seed in the filename.
+
+SPECIAL THANKS:
+    DSF AKA DoodSF AKA deranged_squirrel_fighter, who commissioned this randomizer. It's thanks to him that everyone can play CV2 randomized now. Check out his Twitch channel at https://www.twitch.tv/doodsf where he plays tons of randomizers.
+    Also thanks to tkempkes on romhacking.net for his CV2 Annoyance Fixes.
+
+Like this randomizer? Be sure to check out my other projects:
+    FF6 Beyond Chaos Randomizer
+        https://github.com/abyssonym/beyondchaos
+    FF Tactics Rumble Chaos Crashdown Randomizer
+        https://github.com/abyssonym/rumble_chaos_crashdown
+    Breath of Fire 2 Painsong Randomizer
+        https://github.com/abyssonym/painsong
+    Chrono Trigger Eternal Nightmare Randomizer
+        https://github.com/abyssonym/eternalnightmare
+    Final Fantasy Mystic Quest Terrible Secret Randomizer
+        https://github.com/abyssonym/terriblesecret
+    Super Mario RPG Gentle Beauty and Raw Power Randomizer
+        https://github.com/abyssonym/smrpg_gbarp
+    FF5 Grand Cross Randomizer
+        https://github.com/abyssonym/grand_cross
+    FF4 Beyond Babil Ancient Cave Randomizer
+        https://github.com/abyssonym/beyond_babil
+    Castlevania Aria of Sorrow Item Randomizer
+        https://github.com/abyssonym/aos_rando
+    Lufia 2 Terror Wave Randomizer
+        http://www.abyssonym.com/2017/09/12/lufia-2-terror-wave-new-randomizer
+    FF Dawn of Souls Approaching Chaos Randomizer
+        http://www.abyssonym.com/2017/10/12/ff-dawn-of-souls-approaching-chaos-randomizer
